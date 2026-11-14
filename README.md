@@ -1,81 +1,31 @@
-# Análisis SQL de e-commerce (Olist) | SQL E-commerce Analysis (Olist)
+# Olist: análisis de ventas con SQL Server y Power BI
 
-[Español](#español) | [English](#english)
+![Dashboard](images/dashboard.png)
 
----
+## Objetivo
+Analizar las ventas de un e-commerce brasileño: responder preguntas de
+negocio con SQL y presentar los resultados en un dashboard interactivo.
 
-## Español
-
-### Objetivo
-
-Responder preguntas de negocio sobre ventas, clientes y pagos de una tienda en línea brasileña usando SQL Server.
-
-### Dataset
-
+## Datos
 Brazilian E-Commerce Public Dataset by Olist (Kaggle), ~100 mil pedidos (2016-2018).
 
-### Herramientas
+## Flujo del proyecto
+1. **Exploración y preguntas de negocio** en SQL Server (`sql/01` y `sql/02`).
+2. **Vista `v_ventas`** que une pedidos, productos, clientes y categorías (`sql/03`).
+3. **Dashboard en Power BI** conectado a la vista, con medidas en DAX.
 
-SQL Server, SSMS
+## Decisiones de análisis
+- Solo pedidos con estado `delivered`.
+- Se excluyen septiembre y octubre de 2018 (datos incompletos).
+- Ingreso = suma de `price` (sin flete).
+- Categorías traducidas al inglés con la tabla oficial del dataset.
+- Métricas del dashboard validadas contra consultas SQL.
 
-### Estructura del proyecto
+## Hallazgos
+- Ingreso total de 13.22M y ticket promedio de 137.
+- São Paulo concentra ~38% del ingreso (5.07M).
+- El ingreso mensual creció durante 2017 y se estabilizó entre 0.8M y 1.0M en 2018.
+- Categorías líderes: health_beauty, watches_gifts y bed_bath_table.
 
-```
-olist-sql-analysis/
-├── README.md
-└── sql/
-    ├── 01_exploracion.sql          # Conteos, estados de pedido, rango de fechas
-    └── 02_preguntas_de_negocio.sql # Preguntas de negocio (ingresos, categorías, pagos)
-```
-
-### Hallazgos clave
-
-- Ingreso total (pedidos entregados): ~13.2 M (BRL)
-- Ticket promedio: ~137 (BRL)
-- São Paulo concentra la mayor cantidad de clientes
-- La tarjeta de crédito es el método de pago dominante
-
-### Cómo reproducirlo
-
-1. Descargar el dataset de [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-2. Importar los CSV a SQL Server (SSMS -> Import Wizard)
-3. Ejecutar los scripts en `/sql` en orden
-
----
-
-## English
-
-### Objective
-
-Answer business questions about sales, customers, and payments of a Brazilian online store using SQL Server.
-
-### Dataset
-
-Brazilian E-Commerce Public Dataset by Olist (Kaggle), ~100k orders (2016-2018).
-
-### Tools
-
-SQL Server, SSMS
-
-### Project structure
-
-```
-olist-sql-analysis/
-├── README.md
-└── sql/
-    ├── 01_exploracion.sql          # Row counts, order statuses, date ranges
-    └── 02_preguntas_de_negocio.sql # Business questions (revenue, categories, payments)
-```
-
-### Key findings
-
-- Total revenue (delivered orders): ~13.2 M (BRL)
-- Average order value: ~137 (BRL)
-- São Paulo has the largest number of customers
-- Credit card is the dominant payment method
-
-### How to reproduce
-
-1. Download the dataset from [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-2. Import the CSV files into SQL Server (SSMS -> Import Wizard)
-3. Run the scripts in `/sql` in order
+## Herramientas
+SQL Server, Power BI Desktop, DAX y las dos nuevos archivos de consultas
